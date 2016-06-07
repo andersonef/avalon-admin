@@ -1,0 +1,19 @@
+{
+    "name": "andersonef/avalon-admin",
+    "version": "1.0.0",
+    "description": "Admin panel and content management for multi-purpose website",
+    "type": "project",
+    "require": {
+        "php": ">=5.6.0",
+        "illuminate/routing" : ">=5.1.0",
+        "illuminate/support" : ">=5.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "Andersonef\\AvalonAdmin\\": "src/module/"
+        }
+    }
+}

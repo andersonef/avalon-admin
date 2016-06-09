@@ -15,7 +15,7 @@ class Website extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'avalonWebsite';
+        return 'Client.AvalonWebsiteService';
     }
 
 }

@@ -7,4 +7,5 @@
  */
 return [
     'adminPath'         => '/avalon/admin',
+    'appName'           => 'AVALON Admin',
 ];

@@ -9,11 +9,16 @@
 namespace Andersonef\AvalonAdmin\Providers;
 
 
-use Andersonef\AvalonAdmin\Commands\InstallCommand;
+use Andersonef\AvalonAdmin\Commands\DownCommand;
+use Andersonef\AvalonAdmin\Commands\UpCommand;
 use Andersonef\AvalonAdmin\Http\Controllers\AuthController;
+use Andersonef\AvalonAdmin\Http\Controllers\Panel\DashboardController;
+use Andersonef\AvalonAdmin\Http\Middlewares\AuthMiddleware;
 use Andersonef\AvalonAdmin\Models\User;
+use Andersonef\AvalonAdmin\Services\Core\UserService;
 use Andersonef\AvalonAdmin\Services\WebsiteService;
 //use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -37,8 +42,15 @@ class AvalonAdminProvider extends ServiceProvider
     public function map(Router $router)
     {
 
-        $router->group(['prefix' => config('adminPath', 'avalon/admin')], function() use ($router){
-            $router->resource('/', AuthController::class, ['only' => ['index','store']]);
+        $router->group(['middleware' => 'web'], function() use($router){
+            $router->group(['prefix' => config('adminPath', 'avalon/admin')], function() use ($router){
+                $router->group(['prefix' => 'panel', 'middleware' => AuthMiddleware::class], function() use ($router) {
+                    $router->resource('/', DashboardController::class, ['only' => ['index'], 'names' => [
+                        'index'     => 'avalon.admin.panel.dashboard.index',
+                    ]]);
+                });
+                $router->resource('/', AuthController::class, ['only' => ['index','store'], 'names' => ['index' => 'avalon.admin.auth.index', 'store' => 'avalon.admin.auth.store']]);
+            });
         });
     }
 
@@ -54,9 +66,16 @@ class AvalonAdminProvider extends ServiceProvider
 
 
         //Setting a new authentication driver:
-        config(['auth.providers.avalon-admin' => ['driver' => 'eloquent', 'model' => User::class]]);
-        config(['auth.guards.avalon-admin' => ['driver' => 'session', 'provider' => 'avalon-admin']]);
+        if(!config('auth.providers.avalon-admin')) {
+            config(['auth.providers.avalon-admin' => ['driver' => 'eloquent', 'model' => User::class]]);
+            config(['auth.guards.avalon-admin' => ['driver' => 'session', 'provider' => 'avalon-admin']]);
+        }
 
-        $this->commands([InstallCommand::class]);
+        $this->commands([UpCommand::class, DownCommand::class]);
+
+        //Injecting dependencies:
+        $this->app->when(UserService::class)->needs(Guard::class)->give(function(){
+            return \Auth::guard('avalon-admin');
+        });
     }
 }

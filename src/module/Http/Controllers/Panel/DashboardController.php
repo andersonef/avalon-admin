@@ -24,7 +24,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return "chegou na index malandrão: ".$this->userService->getLoggedUser()->userName;
+        return view('AvalonAdmin::content.panel.dashboard.index');
     }
 
 }

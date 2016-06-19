@@ -53,6 +53,8 @@ class UpCommand extends Command
     {
         $this->info(trans('AvalonAdmin::Module.commands.up.preparingFiles'));
         $this->recursiveCopy(__DIR__.'/../../assets', public_path(ParameterService::ASSET_PATH));
+        @copy(__DIR__.'/../../config/avalon-admin.php', config_path('avalon-admin.php'));
+        $this->info(trans('AvalonAdmin::Module.commands.up.configFile'));
         $this->info(trans('AvalonAdmin::Module.commands.up.filesOk', ['path' => public_path(ParameterService::ASSET_PATH)]));
     }
 

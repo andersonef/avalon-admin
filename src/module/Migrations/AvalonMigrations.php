@@ -33,6 +33,7 @@ class AvalonMigrations extends Migration
             $table->bigIncrements('id');
             $table->string('userName');
             $table->string('userEmail');
+            $table->binary('userPicture')->nullable();
             $table->string('userPassword');
             $table->string('roleId');
             $table->foreign('roleId')->references('id')->on('avalonadmin_roles');

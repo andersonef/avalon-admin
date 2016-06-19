@@ -12,7 +12,9 @@ return [
             'databaseOk'                => 'Database Installed!',
 
             'preparingFiles'            => 'Copying asset files to your public directory...',
-            'filesOk'                   => 'Asset files successfully copied to :path'
+            'filesOk'                   => 'Asset files successfully copied to :path',
+
+            'configFile'                => 'A new config file has been created! [avalon-admin.php]',
         ],
         'down'      => [
             'description'               => 'Uninstall the mini-CMS Avalon Admin on your laravel 5.2 project. It will remove all database tables and there is no way to go back!',

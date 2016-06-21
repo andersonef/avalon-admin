@@ -102,7 +102,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">@lang('AvalonAdmin::Layout/Admin/Dashboard.mainMenu')</li>
-                <li class="treeview">
+                <li class="treeview dashboard">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.dashboard')</span>
                     </a>
@@ -112,8 +112,8 @@
                         <i class="fa fa-wrench"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.settings')</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="#">
+                <li class="treeview users">
+                    <a href="{!! route('avalon.admin.panel.users.index') !!}">
                         <i class="fa fa-users"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.users')</span>
                     </a>
                 </li>
@@ -410,9 +410,7 @@
 <script src="/avalon-admin-assets/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/avalon-admin-assets/dist/js/app.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/avalon-admin-assets/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/avalon-admin-assets/dist/js/demo.js"></script>
+@yield('libjs')
+@yield('javascript')
 </body>
 </html>

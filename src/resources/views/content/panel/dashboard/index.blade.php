@@ -82,3 +82,9 @@
         <!-- ./col -->
     </div>
 @endsection
+
+@section('javascript')
+    <script type="text/javascript">
+        $(".sidebar-menu .dashboard").addClass('active');
+    </script>
+@endsection

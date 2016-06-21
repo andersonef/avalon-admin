@@ -13,6 +13,7 @@ use Andersonef\AvalonAdmin\Commands\DownCommand;
 use Andersonef\AvalonAdmin\Commands\UpCommand;
 use Andersonef\AvalonAdmin\Http\Controllers\AuthController;
 use Andersonef\AvalonAdmin\Http\Controllers\Panel\DashboardController;
+use Andersonef\AvalonAdmin\Http\Controllers\Panel\UsersController;
 use Andersonef\AvalonAdmin\Http\Middlewares\AuthMiddleware;
 use Andersonef\AvalonAdmin\Models\User;
 use Andersonef\AvalonAdmin\Services\Core\UserService;
@@ -45,8 +46,19 @@ class AvalonAdminProvider extends ServiceProvider
         $router->group(['middleware' => 'web'], function() use($router){
             $router->group(['prefix' => config('adminPath', 'avalon/admin')], function() use ($router){
                 $router->group(['prefix' => 'panel', 'middleware' => AuthMiddleware::class], function() use ($router) {
+                    //dashboard
                     $router->resource('/', DashboardController::class, ['only' => ['index'], 'names' => [
                         'index'     => 'avalon.admin.panel.dashboard.index',
+                    ]]);
+
+                    //User Management
+                    $router->resource('/users', UsersController::class, ['names' => [
+                        'index'     => 'avalon.admin.panel.users.index',
+                        'create'    => 'avalon.admin.panel.users.create',
+                        'store'     => 'avalon.admin.panel.users.store',
+                        'update'    => 'avalon.admin.panel.users.update',
+                        'edit'      => 'avalon.admin.panel.users.edit',
+                        'destroy'   => 'avalon.admin.panel.users.destroy',
                     ]]);
                 });
                 $router->resource('/', AuthController::class, ['only' => ['index','store'], 'names' => ['index' => 'avalon.admin.auth.index', 'store' => 'avalon.admin.auth.store']]);

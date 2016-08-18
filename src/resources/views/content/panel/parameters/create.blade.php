@@ -41,15 +41,7 @@
 @endsection
 
 @section('javascript')
-    <!-- CK Editor -->
-    <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
     <script type="text/javascript">
         $(".sidebar-menu .parameters").addClass('active');
-        $(function () {
-            // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-            CKEDITOR.replace('parameterValue');
-            //bootstrap WYSIHTML5 - text editor
-        });
     </script>
 @endsection

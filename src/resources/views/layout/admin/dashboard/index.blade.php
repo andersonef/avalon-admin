@@ -82,7 +82,7 @@
                                     <a href="#" class="btn btn-default btn-flat">@lang('AvalonAdmin::Layout/Admin/Dashboard.btnProfile')</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">@lang('AvalonAdmin::Layout/Admin/Dashboard.btnLogout')</a>
+                                    <a href="{!! route('avalon.admin.auth.destroy') !!}" class="btn btn-default btn-flat">@lang('AvalonAdmin::Layout/Admin/Dashboard.btnLogout')</a>
                                 </div>
                             </li>
                         </ul>
@@ -119,15 +119,16 @@
                     </a>
                 </li>
 
-                <li class="treeview parameters">
-                    <a href="{!! route('avalon.admin.panel.parameters.index') !!}">
-                        <i class="fa fa-edit"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.parameters')</span>
-                    </a>
-                </li>
 
                 <li class="treeview categories">
                     <a href="{!! route('avalon.admin.panel.categories.index') !!}">
                         <i class="fa fa-files-o"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.categories')</span>
+                    </a>
+                </li>
+
+                <li class="treeview parameters">
+                    <a href="{!! route('avalon.admin.panel.parameters.index') !!}">
+                        <i class="fa fa-edit"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.parameters')</span>
                     </a>
                 </li>
 

@@ -44,8 +44,8 @@
 
                 <!--Displaying parameters block -->
                 <div class="col-md-10 col-sm-12">
-                    @foreach($items as $parameter)
-                        <div class="col-md-5 col-sm-12">
+                    @foreach($items as $i => $parameter)
+                        <div class="col-md-4 col-sm-12">
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h4 class="box-title">{!! $parameter->id !!}</h4>

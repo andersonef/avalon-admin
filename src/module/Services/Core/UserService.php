@@ -43,4 +43,9 @@ class UserService
     {
         return $this->guard->user();
     }
+
+    public function logout()
+    {
+        $this->guard->logout();
+    }
 }

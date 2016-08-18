@@ -36,8 +36,17 @@ class AuthController extends Controller
             $this->userService->authenticate($request->only(['userEmail', 'userPassword']));
             return redirect(route('avalon.admin.panel.dashboard.index'));
         } catch (AvalonAdminPanelException $e) {
-            dd('deu erro mano: ', $e->getMessage());
             return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function destroy()
+    {
+        try{
+            $this->userService->logout();
+            return redirect()->route('avalon.admin.auth.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['errors' => $e->getMessage()]);
         }
     }
 }

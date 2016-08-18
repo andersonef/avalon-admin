@@ -4,21 +4,19 @@
 
 
     <div class="form-group">
+        <label class="col-md-2 col-sm-12">@lang('AvalonAdmin::Content/Panel/Parameters.create.lblName')</label>
+        <div class="col-md-4 col-sm-12">
+            <input type="text" class="form-control" name="id" value="{!! old('id', (empty($parameter)) ? '' : $parameter->id) !!}">
+        </div>
+
+
         <label class="col-md-2 col-sm-12">@lang('AvalonAdmin::Content/Panel/Parameters.create.lblCategory')</label>
-        <div class="col-md-10 col-sm-12">
+        <div class="col-md-4 col-sm-12">
             <select class="select form-control" name="categoryId">
                 @foreach(Avalon\Category::getFirstOnes()->get() as $category)
                     <option value="{!! $category->id !!}">{!! $category->categoryName !!}</option>
                 @endforeach
             </select>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label class="col-md-2 col-sm-12">@lang('AvalonAdmin::Content/Panel/Parameters.create.lblName')</label>
-        <div class="col-md-10 col-sm-12">
-            <input type="text" class="form-control" name="id" value="{!! old('id', (empty($parameter)) ? '' : $parameter->id) !!}">
         </div>
     </div>
 

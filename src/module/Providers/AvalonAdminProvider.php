@@ -57,6 +57,9 @@ class AvalonAdminProvider extends ServiceProvider
                     $router->resource('/', DashboardController::class, ['only' => ['index'], 'names' => [
                         'index'     => 'avalon.admin.panel.dashboard.index',
                     ]]);
+                    //Logout
+                    $router->get('/logout', ['as' => 'avalon.admin.auth.destroy', 'uses' => AuthController::class.'@destroy']);
+
 
                     //User Management
                     $router->resource('/users', UsersController::class, ['names' => [
@@ -90,7 +93,17 @@ class AvalonAdminProvider extends ServiceProvider
 
 
                 });
-                $router->resource('/', AuthController::class, ['only' => ['index','store'], 'names' => ['index' => 'avalon.admin.auth.index', 'store' => 'avalon.admin.auth.store']]);
+                $router->resource('/', AuthController::class, [
+                    'only' => [
+                        'index',
+                        'store',
+                        'destroy'
+                    ],
+                    'names' => [
+                        'index' => 'avalon.admin.auth.index',
+                        'store' => 'avalon.admin.auth.store',
+                    ]
+                ]);
             });
         });
     }

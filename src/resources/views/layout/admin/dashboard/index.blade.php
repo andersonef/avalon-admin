@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="/avalon-admin-assets/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="/avalon-admin-assets/dist/css/skins/_all-skins.min.css">
+    <!--<link rel="stylesheet" href="/avalon-admin-assets/dist/css/skins/_all-skins.min.css">-->
+    <link rel="stylesheet" href="/avalon-admin-assets/dist/css/skins/{!! config('avalon-admin.skinTheme', 'skin-blue-light') !!}.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="/avalon-admin-assets/plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
@@ -38,7 +39,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition {!! config('avalon-admin.skinTheme', 'skin-blue-light') !!} sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">

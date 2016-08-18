@@ -20,8 +20,9 @@ class CategoryRequest extends FormRequest
 
     public function rules()
     {
+        $id = $this->route()->getParameter('categories');
         $rules = [
-            'categoryName'                 => 'required|min:2|alpha_num|unique:avalonadmin_categories,categoryName',
+            'categoryName'                 => 'required|min:2|unique:avalonadmin_categories,categoryName,'.$id,
             'categoryDescription'          => 'required'
         ];
 

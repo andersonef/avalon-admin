@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Parameter extends Model
 {
     protected $table = 'avalonadmin_parameters';
-    protected $fillable = ['id', 'parameterDescription', 'userId', 'parameterValue'];
+    protected $fillable = ['id', 'parameterDescription', 'userId', 'parameterValue', 'categoryId'];
     public $incrementing = false;
     public $keyType = 'string';
 

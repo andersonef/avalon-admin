@@ -14,5 +14,5 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = 'avalonadmin_categories';
-    protected $fillable = ['categoryName','categoryDescription'];
+    protected $fillable = ['categoryName','categoryDescription', 'categoryInternal'];
 }

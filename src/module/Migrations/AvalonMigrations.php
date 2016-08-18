@@ -9,6 +9,7 @@
 namespace Andersonef\AvalonAdmin\Migrations;
 
 
+use Andersonef\AvalonAdmin\Models\Category;
 use Andersonef\AvalonAdmin\Models\ContentType;
 use Andersonef\AvalonAdmin\Models\Role;
 use Andersonef\AvalonAdmin\Models\User;
@@ -41,14 +42,6 @@ class AvalonMigrations extends Migration
             $table->nullableTimestamps();
         });
 
-        Schema::create('avalonadmin_parameters', function(Blueprint $table){
-            $table->string('id');
-            $table->primary('id');
-            $table->string('parameterDescription')->nullable();
-            $table->string('parameterValue');
-            $table->nullableTimestamps();
-        });
-
         Schema::create('avalonadmin_content_types', function(Blueprint $table){
             $table->string('id');
             $table->primary('id');
@@ -61,6 +54,17 @@ class AvalonMigrations extends Migration
             $table->bigIncrements('id');
             $table->string('categoryName');
             $table->string('categoryDescription')->nullable();
+            $table->boolean('categoryInternal')->default(false);
+            $table->nullableTimestamps();
+        });
+
+        Schema::create('avalonadmin_parameters', function(Blueprint $table){
+            $table->string('id');
+            $table->primary('id');
+            $table->unsignedBigInteger('categoryId')->default(1);
+            $table->foreign('categoryId')->references('id')->on('avalonadmin_categories');
+            $table->string('parameterDescription')->nullable();
+            $table->string('parameterValue');
             $table->nullableTimestamps();
         });
 
@@ -162,6 +166,9 @@ class AvalonMigrations extends Migration
         //Content types
         ContentType::create(['id' => 'page', 'contentTypeName' => 'AvalonAdmin::Module/Models.ContentType.page.name', 'contentTypeDescription' => 'AvalonAdmin::Module/Models.ContentType.page.description']);
         ContentType::create(['id' => 'gallery', 'contentTypeName' => 'AvalonAdmin::Module/Models.ContentType.gallery.name', 'contentTypeDescription' => 'AvalonAdmin::Module/Models.ContentType.gallery.description']);
+
+        //Default Category:
+        Category::create(['categoryName' => 'Default', 'categoryDescription' => 'Default category for internal content like parameters and so.', 'categoryInternal' => true]);
 
         //Super Admin User:
         User::create(['userName' => $adminInfo['userName'], 'userEmail' => $adminInfo['userEmail'], 'userPassword' => bcrypt($adminInfo['userPassword']),'roleId' => 'superadmin']);

@@ -17,9 +17,15 @@ use Illuminate\Routing\Controller;
 class ParametersController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('AvalonAdmin::content.panel.parameters.index');
+        $items = Parameter::getLastOnes();
+        if($request->has('categoryId')){
+            $items->where('categoryId','=',$request->categoryId);
+        }
+        $items = $items->paginate(25);
+
+        return view('AvalonAdmin::content.panel.parameters.index', ['items' => $items, 'categoryId' => $request->categoryId]);
     }
 
     public function create()
@@ -39,7 +45,7 @@ class ParametersController extends Controller
     public function store(ParameterRequest $request)
     {
         try{
-            Parameter::create($request->only(['id', 'parameterDescription', 'parameterValue']));
+            Parameter::create($request->only(['id', 'parameterDescription', 'parameterValue', 'categoryId']));
             return redirect()->route('avalon.admin.panel.parameters.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Parameters.store.success')]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['errors' => $e->getMessage()]);
@@ -61,7 +67,7 @@ class ParametersController extends Controller
     public function update($id, ParameterRequest $request)
     {
         try{
-            Parameter::update($id, $request->only(['id', 'parameterDescription', 'parameterValue']));
+            Parameter::update($id, $request->only(['id', 'parameterDescription', 'parameterValue', 'categoryId']));
             return redirect()->route('avalon.admin.panel.parameters.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Parameters.update.success')]);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['errors' => $e->getMessage()]);

@@ -12,6 +12,7 @@ return [
         'title'         => '.:: New Category | '.config('avalon-admin.appName').' ::.',
         'lblName'       => 'Category Name',
         'lblDescription'    => 'Category Description',
+        'lblInternal'       => 'Is this an internal category?',
     ],
 
 

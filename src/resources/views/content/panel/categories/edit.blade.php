@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <form action="{!! route('avalon.admin.panel.categories.update', $parameter->id) !!}" method="post" class="form form-horizontal">
+            <form action="{!! route('avalon.admin.panel.categories.update', $category->id) !!}" method="post" class="form form-horizontal">
                 <input type="hidden" name="_method" value="PUT">
                 @include('AvalonAdmin::content/panel/categories/_form')
             </form>

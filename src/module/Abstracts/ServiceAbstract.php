@@ -38,6 +38,19 @@ abstract class ServiceAbstract
     }
 
 
+    /** Return a querybuilder representing a query searching for all the models, order by id asc. You can use all items from the querybuilder
+     * by calling the get method or paginate them using the paginate method.
+     * Usage:
+     *  $items = Avalon\ThisFacade::getFirstOnes()->paginate(10); //will return 10 items in a paginate object native from laravel.
+     *  $items = Avalon\ThisFacade::getFirstOnes()->get(); //will return a collection containing all items from this query.
+     * @return QueryBuilder
+     */
+    public function getFirstOnes()
+    {
+        return $this->model->newQuery()->orderBy('id', 'asc');
+    }
+
+
     /** Return one model matching the parameter $name.
      * @param $name
      * @return Model|null

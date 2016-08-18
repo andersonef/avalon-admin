@@ -9,8 +9,8 @@
 namespace Andersonef\AvalonAdmin\Http\Controllers\Panel;
 
 
-use Andersonef\AvalonAdmin\Facades\Parameter;
-use Andersonef\AvalonAdmin\Http\Requests\ParameterRequest;
+use Andersonef\AvalonAdmin\Facades\Category;
+use Andersonef\AvalonAdmin\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -29,18 +29,18 @@ class CategoriesController extends Controller
 
     public function edit($id)
     {
-        $parameter = Parameter::find($id);
-        if(!$parameter)
+        $category = Category::find($id);
+        if(!$category)
             return abort(404);
-        return view('AvalonAdmin::content.panel.categories.edit', ['category' => $parameter]);
+        return view('AvalonAdmin::content.panel.categories.edit', ['category' => $category]);
     }
 
 
-    public function store(ParameterRequest $request)
+    public function store(CategoryRequest $request)
     {
         try{
-            Parameter::create($request->only(['id', 'parameterDescription', 'parameterValue']));
-            return redirect()->route('avalon.admin.panel.categories.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Parameters.store.success')]);
+            Category::create($request->only(['categoryName', 'categoryDescription', 'categoryInternal']));
+            return redirect()->route('avalon.admin.panel.categories.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Categories.store.success')]);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['errors' => $e->getMessage()]);
         }
@@ -50,19 +50,19 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         try{
-            Parameter::destroy($id);
-            return redirect()->route('avalon.admin.panel.categories.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Parameters.destroy.success')]);
+            Category::destroy($id);
+            return redirect()->route('avalon.admin.panel.categories.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Categories.destroy.success')]);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['errors' => $e->getMessage()]);
         }
     }
 
 
-    public function update($id, ParameterRequest $request)
+    public function update($id, CategoryRequest $request)
     {
         try{
-            Parameter::update($id, $request->only(['id', 'parameterDescription', 'parameterValue']));
-            return redirect()->route('avalon.admin.panel.categories.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Parameters.update.success')]);
+            Category::update($id, $request->only(['categoryName', 'categoryDescription', 'categoryInternal']));
+            return redirect()->route('avalon.admin.panel.categories.index')->with(['success' => trans('AvalonAdmin::Module/Controllers/Categories.update.success')]);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['errors' => $e->getMessage()]);
         }

@@ -1,12 +1,12 @@
 <?php
 return [
     'store'     => [
-        'success'       => 'Parameter successfully saved!',
+        'success'       => 'Category successfully saved!',
     ],
     'destroy'   => [
-        'success'       => 'Parameter successfully removed!',
+        'success'       => 'Category successfully removed!',
     ],
     'update'    => [
-        'success'       => 'Parameter successfully updated!',
+        'success'       => 'Category successfully updated!',
     ]
 ];

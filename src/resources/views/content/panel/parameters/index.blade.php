@@ -34,26 +34,41 @@
             <!--BOX CONTENT -->
             <div class="box-body">
                 <p>@lang('AvalonAdmin::Content/Panel/Parameters.index.info')</p>
-                @foreach($items = Avalon\Parameter::getLastOnes()->paginate(25) as $parameter)
-                    <div class="col-md-3 col-sm-12">
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">{!! $parameter->id !!} ({!! $parameter->parameterDescription !!})</h4>
-                                <div class="box-tools pull-right">
-                                    <a href="{!! route('avalon.admin.panel.parameters.edit', $parameter->id) !!}" type="button" class="btn btn-box-tool"><i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a data-method="DELETE" data-token="{!! csrf_token() !!}" data-confirm="Tem certeza que deseja apagar esse parâmetro?" href="{!! route('avalon.admin.panel.parameters.destroy',$parameter->id) !!}" type="button" class="btn btn-box-tool"><i class="fa fa-times"></i>
-                                    </a>
+                <!-- Categories buttons -->
+                <div class="col-md-2 col-sm-12">
+                    <a href="{!! route('avalon.admin.panel.parameters.index') !!}" class="btn {!! (!$categoryId) ? 'btn-primary' : 'btn-default' !!}">@lang('AvalonAdmin::Content/Panel/Parameters.index.btnAll')</a>
+                    @foreach(Avalon\Category::getLastOnes()->get() as $category)
+                        <a href="{!! route('avalon.admin.panel.parameters.index', ['categoryId' => $category->id]) !!}" class="btn {!! ($category->id == $categoryId) ? 'btn-primary' : 'btn-default' !!}">{!! $category->categoryName !!}</a>
+                    @endforeach
+                </div>
+
+                <!--Displaying parameters block -->
+                <div class="col-md-10 col-sm-12">
+                    @foreach($items as $parameter)
+                        <div class="col-md-5 col-sm-12">
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">{!! $parameter->id !!}</h4>
+                                    <div class="box-tools pull-right">
+                                        <a href="{!! route('avalon.admin.panel.parameters.edit', $parameter->id) !!}" type="button" class="btn btn-box-tool"><i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a data-method="DELETE" data-token="{!! csrf_token() !!}" data-confirm="Tem certeza que deseja apagar esse parâmetro?" href="{!! route('avalon.admin.panel.parameters.destroy',$parameter->id) !!}" type="button" class="btn btn-box-tool"><i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    @if($parameter->parameterDescription)
+                                        <small><strong>@lang('AvalonAdmin::Content/Panel/Parameters.index.lblDescription')</strong>{!! $parameter->parameterDescription !!}</small>
+                                    @endif
+                                    <h5>{!! $parameter->parameterValue !!}</h5>
+                                </div>
+                                <div class="box-footer">
+                                    @lang('AvalonAdmin::Content/Panel/Parameters.index.lblUsage', ['id' => $parameter->id])
                                 </div>
                             </div>
-                            <div class="box-body"><h5>{!! $parameter->parameterValue !!}</h5></div>
-                            <div class="box-footer">
-                                @lang('AvalonAdmin::Content/Panel/Parameters.index.lblUsage', ['id' => $parameter->id])
-                            </div>
                         </div>
-                    </div>
-                @endforeach
-
+                    @endforeach
+                </div>
                 {!! $items->render() !!}
             </div>
 

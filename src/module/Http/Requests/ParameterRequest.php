@@ -21,8 +21,9 @@ class ParameterRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'id'             => 'required|min:2|alpha_num',
-            'parameterValue'          => 'required'
+            'categoryId'        => 'required|exists:avalonadmin_categories,id',
+            'id'                => 'required|min:2|alpha_num',
+            'parameterValue'    => 'required'
         ];
 
         if($this->getMethod() == 'POST'){

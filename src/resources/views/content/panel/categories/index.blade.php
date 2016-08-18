@@ -38,7 +38,7 @@
                     <div class="col-md-3 col-sm-12">
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h4 class="box-title">{!! $category->id !!} ({!! $category->parameterDescription !!})</h4>
+                                <h4 class="box-title">{!! $category->id !!} - {!! $category->categoryName !!}</h4>
                                 <div class="box-tools pull-right">
                                     <a href="{!! route('avalon.admin.panel.categories.edit', $category->id) !!}" type="button" class="btn btn-box-tool"><i class="fa fa-pencil"></i>
                                     </a>
@@ -46,10 +46,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="box-body"><h5>{!! $category->parameterValue !!}</h5></div>
-                            <div class="box-footer">
-                                @lang('AvalonAdmin::Content/Panel/Categories.index.lblUsage', ['id' => $category->id])
-                            </div>
+                            <div class="box-body"><h5>{!! $category->categoryDescription !!}</h5></div>
                         </div>
                     </div>
                 @endforeach

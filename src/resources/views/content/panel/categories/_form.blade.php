@@ -10,6 +10,13 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <label for="categoryInternal" class="col-md-2 col-sm-12">@lang('AvalonAdmin::Content/Panel/Categories.create.lblInternal')</label>
+        <div class="col-md-10 col-sm-12">
+            <input type="checkbox" name="categoryInternal" value="1" {!! (old('categoryInternal', (empty($category)) ? '' : $category->categoryInternal)) ? 'checked' : '' !!} class="checkbox" id="categoryInternal">
+        </div>
+    </div>
+
 
     <div class="form-group">
         <label class="col-md-2 col-sm-12">@lang('AvalonAdmin::Content/Panel/Categories.create.lblDescription')</label>

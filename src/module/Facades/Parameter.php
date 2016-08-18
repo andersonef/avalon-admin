@@ -11,11 +11,11 @@ namespace Andersonef\AvalonAdmin\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Website extends Facade
+class Parameter extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'AvalonAdmin.WebsiteService';
+        return 'AvalonAdmin.ParameterService';
     }
 
 }

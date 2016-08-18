@@ -44,7 +44,6 @@ class AvalonMigrations extends Migration
         Schema::create('avalonadmin_parameters', function(Blueprint $table){
             $table->string('id');
             $table->primary('id');
-
             $table->string('parameterDescription')->nullable();
             $table->string('parameterValue');
             $table->nullableTimestamps();

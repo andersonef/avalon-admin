@@ -118,14 +118,14 @@
                     </a>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
+                <li class="treeview parameters">
+                    <a href="{!! route('avalon.admin.panel.parameters.index') !!}">
                         <i class="fa fa-edit"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.parameters')</span>
                     </a>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
+                <li class="treeview categories">
+                    <a href="{!! route('avalon.admin.panel.categories.index') !!}">
                         <i class="fa fa-files-o"></i> <span>@lang('AvalonAdmin::Layout/Admin/Dashboard.menu.categories')</span>
                     </a>
                 </li>
@@ -166,6 +166,26 @@
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
+            @if (count($errors) > 0)
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-ban"></i> @lang('AvalonAdmin::Layout/Admin/Config.lblAlert') </h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
+
+
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> @lang('AvalonAdmin::Layout/Admin/Config.lblAlert') </h4>
+                    {!! session('success') !!}
+                </div>
+            @endif
             @yield('content')
             <!-- /.row -->
 

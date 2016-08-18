@@ -14,11 +14,19 @@ use Illuminate\Database\Eloquent\Model;
 class Parameter extends Model
 {
     protected $table = 'avalonadmin_parameters';
-    protected $fillable = ['id', 'parameterName', 'parameterDescription', 'userId', 'parameterValue'];
+    protected $fillable = ['id', 'parameterDescription', 'userId', 'parameterValue'];
     public $incrementing = false;
+    public $keyType = 'string';
 
     public function User()
     {
         return $this->belongsTo(User::class, 'userId');
     }
+
+    public function __toString()
+    {
+        return $this->parameterValue;
+    }
+
+
 }

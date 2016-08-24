@@ -143,5 +143,6 @@ class AvalonAdminProvider extends ServiceProvider
         //Injecting dependencies on services:
         $this->app->when(ParameterService::class)->needs(Model::class)->give(Parameter::class);
         $this->app->when(CategoryService::class)->needs(Model::class)->give(Category::class);
+        $this->app->when(\Andersonef\AvalonAdmin\Services\UserService::class)->needs(Model::class)->give(User::class);
     }
 }

@@ -36,10 +36,12 @@
                 <p>@lang('AvalonAdmin::Content/Panel/Parameters.index.info')</p>
                 <!-- Categories buttons -->
                 <div class="col-md-2 col-sm-12">
-                    <a href="{!! route('avalon.admin.panel.parameters.index') !!}" class="btn {!! (!$categoryId) ? 'btn-primary' : 'btn-default' !!}">@lang('AvalonAdmin::Content/Panel/Parameters.index.btnAll')</a>
-                    @foreach(Avalon\Category::getLastOnes()->get() as $category)
-                        <a href="{!! route('avalon.admin.panel.parameters.index', ['categoryId' => $category->id]) !!}" class="btn {!! ($category->id == $categoryId) ? 'btn-primary' : 'btn-default' !!}">{!! $category->categoryName !!}</a>
-                    @endforeach
+                    <div class="btn-group btn-group-vertical">
+                        <a href="{!! route('avalon.admin.panel.parameters.index') !!}" class="btn {!! (!$categoryId) ? 'btn-primary' : 'btn-default' !!}">@lang('AvalonAdmin::Content/Panel/Parameters.index.btnAll')</a>
+                        @foreach(Avalon\Category::havingParameters()->orderBy('categoryName', 'asc')->get() as $category)
+                            <a href="{!! route('avalon.admin.panel.parameters.index', ['categoryId' => $category->id]) !!}" class="btn {!! ($category->id == $categoryId) ? 'btn-primary' : 'btn-default' !!}">{!! $category->categoryName !!}</a>
+                        @endforeach
+                    </div>
                 </div>
 
                 <!--Displaying parameters block -->

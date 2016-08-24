@@ -15,5 +15,14 @@ use Andersonef\AvalonAdmin\Models\Parameter;
 class CategoryService extends ServiceAbstract
 {
 
+    public function havingParameters()
+    {
+        return $this->model->newQuery()->whereHas('Parameters', function($q){ });
+    }
 
+
+    public function havingContent()
+    {
+        return $this->model->newQuery()->whereHas('Contents', function($q){});
+    }
 }

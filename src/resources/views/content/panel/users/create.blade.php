@@ -31,8 +31,8 @@
                 </div>
             </div>
 
-            <form action="{!! route('avalon.admin.panel.parameters.update', $parameter->id) !!}" method="post" class="form form-horizontal">
-                <input type="hidden" name="_method" value="PUT">
+            <form action="{!! route('avalon.admin.panel.parameters.store') !!}" method="post" class="form form-horizontal">
+                <!--BOX CONTENT -->
                 @include('AvalonAdmin::content/panel/parameters/_form')
             </form>
         </div>
@@ -43,6 +43,5 @@
 @section('javascript')
     <script type="text/javascript">
         $(".sidebar-menu .parameters").addClass('active');
-        $('[name=categoryId]').val('{!! $parameter->categoryId !!}');
     </script>
 @endsection

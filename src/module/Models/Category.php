@@ -15,4 +15,15 @@ class Category extends Model
 {
     protected $table = 'avalonadmin_categories';
     protected $fillable = ['categoryName','categoryDescription', 'categoryInternal'];
+
+
+    public function Parameters()
+    {
+        return $this->hasMany(Parameter::class, 'categoryId');
+    }
+
+    public function Contents()
+    {
+        return $this->hasMany(Content::class, 'categoryId');
+    }
 }

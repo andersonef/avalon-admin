@@ -20,10 +20,7 @@ class CategoryRequest extends FormRequest
 
     public function rules()
     {
-        if(!$this->categoryInternal){
-            $this->merge(['categoryInternal' => 0]);
-        }
-        $id = $this->route()->getParameter('categories');
+        $id = $this->route()->parameter('category');
         $rules = [
             'categoryName'                 => 'required|min:2|unique:avalonadmin_categories,categoryName,'.$id,
             'categoryDescription'          => 'required'

@@ -43,6 +43,5 @@
 @section('javascript')
     <script type="text/javascript">
         $(".sidebar-menu .parameters").addClass('active');
-        $('[name=categoryId]').val('{!! $parameter->categoryId !!}');
     </script>
 @endsection

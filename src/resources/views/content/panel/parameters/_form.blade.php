@@ -1,4 +1,4 @@
-         <!--BOX CONTENT -->
+<!--BOX CONTENT -->
 <div class="box-body">
     {!! csrf_field() !!}
 

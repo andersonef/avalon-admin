@@ -14,5 +14,12 @@
         "psr-4": {
             "Andersonef\\AvalonAdmin\\": "src/module/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Andersonef\\AvalonAdmin\\Providers\\AvalonAdminProvider"
+            ]
+        }
     }
 }
